@@ -1,0 +1,413 @@
+/* ==========================================================================
+   控件层：模式开关 / 协议选择 / 输入框 / 文本域 / 上传区 / 按钮
+   ========================================================================== */
+
+/* ===== Mode Toggle ===== */
+.mode-toggle {
+  display: flex;
+  background: rgba(229, 231, 235, 0.5);
+  border-radius: 40px;
+  padding: 4px;
+  margin-bottom: 22px;
+  position: relative;
+  user-select: none;
+}
+
+.mode-toggle .mode-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 36px;
+  background: transparent;
+  color: #6b7280;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: inherit;
+}
+
+.mode-toggle .mode-btn:hover {
+  color: #4b5563;
+}
+
+.mode-toggle .mode-btn.active {
+  color: #fff;
+}
+
+.mode-toggle .mode-slider {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  border-radius: 36px;
+  z-index: 1;
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+}
+
+.mode-toggle .mode-slider.left {
+  left: 4px;
+  right: 50%;
+}
+
+.mode-toggle .mode-slider.right {
+  left: 50%;
+  right: 4px;
+}
+
+/* ===== Protocol Selector ===== */
+.proto-selector {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.proto-btn {
+  flex: 1;
+  min-width: 68px;
+  padding: 8px 12px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.5);
+  color: #6b7280;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  user-select: none;
+  font-family: inherit;
+}
+
+.proto-btn:hover {
+  border-color: #c4b5fd;
+  color: #7c3aed;
+}
+
+.proto-btn.active {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.proto-btn.disabled {
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+/* ===== Form ===== */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group .label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  min-height: 20px;
+}
+
+.form-group .label-row label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.input-wrap {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 0 16px;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.input-wrap:focus-within {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+
+.input-wrap svg {
+  width: 20px;
+  height: 20px;
+  stroke: #9ca3af;
+  stroke-width: 1.8;
+  flex-shrink: 0;
+}
+
+.input-wrap input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 14px 12px;
+  font-size: 0.92rem;
+  color: #1a1a2e;
+  outline: none;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  min-width: 0;
+}
+
+.input-wrap input::placeholder {
+  color: #aaa;
+}
+
+.input-wrap input:disabled {
+  background: transparent;
+  color: #6b7280;
+  -webkit-text-fill-color: #6b7280;
+}
+
+.input-wrap.locked {
+  border-color: #d1d5db;
+  background: rgba(243, 244, 246, 0.5);
+}
+
+/* ===== Textarea ===== */
+.yaml-input-wrap textarea {
+  width: 100%;
+  min-height: 180px;
+  resize: vertical;
+  padding: 16px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.8);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: #1f2937;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  tab-size: 2;
+}
+
+.yaml-input-wrap textarea:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+
+.yaml-input-wrap textarea::placeholder {
+  color: #aaa;
+}
+
+.yaml-input-wrap textarea.input-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+.validate-hint {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.validate-hint.ok {
+  color: #10b981;
+}
+
+.validate-hint.error {
+  color: #ef4444;
+}
+
+/* ===== Upload Zone ===== */
+.upload-zone {
+  margin-top: 12px;
+  padding: 24px 20px;
+  border: 2px dashed #d1d5db;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.upload-zone:hover,
+.upload-zone.dragover {
+  border-color: #7c3aed;
+  background: rgba(124, 58, 237, 0.06);
+}
+
+.upload-zone svg {
+  width: 32px;
+  height: 32px;
+  stroke: #9ca3af;
+  stroke-width: 1.5;
+  margin-bottom: 8px;
+}
+
+.upload-zone .upload-text {
+  font-size: 0.88rem;
+  color: #6b7280;
+}
+
+.upload-zone .upload-text strong {
+  color: #7c3aed;
+}
+
+.upload-zone .upload-hint {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+.upload-zone .file-name {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(124, 58, 237, 0.08);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  color: #7c3aed;
+  font-weight: 500;
+}
+
+.upload-zone.has-file .file-name {
+  display: inline-flex;
+}
+
+.upload-zone.has-file .upload-icon-big,
+.upload-zone.has-file .upload-text,
+.upload-zone.has-file .upload-hint {
+  display: none;
+}
+
+.upload-zone input[type='file'] {
+  display: none;
+}
+
+/* ===== Buttons ===== */
+.btn-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn-row .btn {
+  flex: 1 1 0%;
+  min-width: 0;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 14px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.25s, opacity 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.btn-row .btn:active {
+  transform: scale(0.97);
+}
+
+.btn-row .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+}
+.btn-primary:hover:not(:disabled) {
+  box-shadow: 0 6px 24px rgba(124, 58, 237, 0.4);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #0d9488, #0f766e);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.3);
+}
+.btn-secondary:hover:not(:disabled) {
+  box-shadow: 0 6px 24px rgba(13, 148, 136, 0.4);
+}
+
+.btn-edit {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+}
+.btn-edit:hover:not(:disabled) {
+  box-shadow: 0 6px 24px rgba(245, 158, 11, 0.4);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+}
+.btn-success:hover:not(:disabled) {
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.4);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.6);
+  color: #374151;
+  border: 1.5px solid #e5e7eb;
+}
+.btn-outline:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: #d1d5db;
+}
+
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  border-radius: 10px;
+}
+
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.spinner.dark {
+  border-color: rgba(124, 58, 237, 0.2);
+  border-top-color: #7c3aed;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 540px) {
+  .btn-row {
+    flex-direction: column;
+  }
+
+  /* 五个协议按钮在窄屏下保持单行，避免 Trojan 被挤到第二行 */
+  .proto-selector {
+    gap: 6px;
+  }
+
+  .proto-btn {
+    min-width: 0;
+    padding: 8px 4px;
+    font-size: 0.72rem;
+  }
+}

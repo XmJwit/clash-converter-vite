@@ -1,0 +1,483 @@
+/* ==========================================================================
+   输出层：结果区 / 订阅链接 / YAML 预览 / 代理卡片
+   ========================================================================== */
+
+.output-area {
+  margin-top: 24px;
+  display: none;
+}
+
+.output-area.visible {
+  display: block;
+  animation: fadeSlideUp 0.35s ease-out;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== 订阅链接 ===== */
+.sub-section {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.06), rgba(109, 40, 217, 0.04));
+  border: 1px solid rgba(124, 58, 237, 0.18);
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+
+.theme-teal .sub-section {
+  background: linear-gradient(135deg, rgba(13, 148, 136, 0.07), rgba(15, 118, 110, 0.04));
+  border-color: rgba(13, 148, 136, 0.2);
+}
+
+.sub-section .sub-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6d28d9;
+  margin-bottom: 8px;
+}
+
+.theme-teal .sub-section .sub-label {
+  color: #0f766e;
+}
+
+.sub-section .sub-label svg {
+  width: 18px;
+  height: 18px;
+}
+
+.sub-hint {
+  font-size: 0.78rem;
+  color: #6b7280;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.sub-hint.error {
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.08);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+}
+
+.sub-hint code {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.74rem;
+  background: rgba(0, 0, 0, 0.06);
+  padding: 1px 5px;
+  border-radius: 5px;
+}
+
+.link-btn {
+  border: none;
+  background: none;
+  padding: 0 2px;
+  color: #7c3aed;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.sub-url-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0 14px;
+}
+
+.sub-url-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px 4px;
+  font-size: 0.85rem;
+  color: #1f2937;
+  outline: none;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  user-select: all;
+  min-width: 0;
+}
+
+.sub-url-box .btn-copy-sub {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, opacity 0.2s;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+  font-family: inherit;
+}
+
+.theme-teal .sub-url-box .btn-copy-sub {
+  background: linear-gradient(135deg, #0d9488, #0f766e);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
+}
+
+.sub-url-box .btn-copy-sub:hover:not(:disabled) {
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+}
+
+.sub-url-box .btn-copy-sub:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ===== YAML 预览 ===== */
+.yaml-section summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  padding: 8px 0;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+}
+
+.yaml-section summary::-webkit-details-marker {
+  display: none;
+}
+
+.yaml-section summary .chevron {
+  transition: transform 0.25s ease;
+}
+
+.yaml-section details[open] summary .chevron {
+  transform: rotate(180deg);
+}
+
+.yaml-preview {
+  background: rgba(249, 250, 251, 0.85);
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px 20px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: #1f2937;
+  max-height: 320px;
+  overflow: auto;
+  white-space: pre;
+  tab-size: 2;
+  user-select: all;
+  margin-top: 8px;
+}
+
+.yaml-preview::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.yaml-preview::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+.output-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.output-actions .btn-action {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  min-height: 44px;
+  font-family: inherit;
+}
+
+.output-actions .btn-action:active {
+  transform: scale(0.97);
+}
+
+.output-actions .btn-primary-act {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.25);
+}
+
+.output-actions .btn-primary-act:hover {
+  box-shadow: 0 6px 24px rgba(124, 58, 237, 0.35);
+  transform: translateY(-1px);
+}
+
+.output-actions .btn-soft-act {
+  background: rgba(255, 255, 255, 0.55);
+  color: #4b5563;
+  border: 1.5px solid rgba(229, 231, 235, 0.7);
+}
+
+.output-actions .btn-soft-act:hover {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: #c4b5fd;
+  color: #7c3aed;
+}
+
+/* ===== 代理结果列表 ===== */
+.proxy-results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.proxy-results-header .result-count {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.proxy-results-header .result-count span {
+  color: #7c3aed;
+}
+
+.proxy-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.proxy-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 16px 18px;
+  transition: all 0.25s;
+  animation: cardSlide 0.3s ease-out backwards;
+}
+
+.proxy-card:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.proxy-card.error {
+  border-left: 3px solid #ef4444;
+}
+
+.proxy-card.success {
+  border-left: 3px solid #10b981;
+}
+
+.proxy-card .card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.proxy-card .card-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.proxy-card .proto-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+.proto-badge.vless {
+  background: rgba(124, 58, 237, 0.12);
+  color: #7c3aed;
+}
+.proto-badge.vmess {
+  background: rgba(59, 130, 246, 0.12);
+  color: #2563eb;
+}
+.proto-badge.ss {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+}
+.proto-badge.ssr {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+}
+.proto-badge.trojan {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+}
+.proto-badge.unknown {
+  background: rgba(156, 163, 175, 0.15);
+  color: #6b7280;
+}
+
+.proxy-card .card-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1f2937;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.proxy-card .card-body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.proxy-card .card-url {
+  flex: 1;
+  min-width: 0;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.78rem;
+  color: #6b7280;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 6px 10px;
+  background: rgba(243, 244, 246, 0.5);
+  border-radius: 8px;
+  user-select: all;
+}
+
+.proxy-card .card-url:hover {
+  overflow: visible;
+  white-space: normal;
+  word-break: break-all;
+}
+
+.proxy-card .card-url.error-text {
+  color: #ef4444;
+}
+
+.proxy-card .card-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.proxy-card .card-actions .btn {
+  padding: 7px 12px;
+  font-size: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+}
+
+@keyframes cardSlide {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.copy-all-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px 0;
+  border-top: 1px solid #f3f4f6;
+  margin-top: 12px;
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #9ca3af;
+}
+
+.empty-state svg {
+  width: 48px;
+  height: 48px;
+  stroke: #d1d5db;
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 540px) {
+  .output-actions {
+    flex-direction: column;
+  }
+
+  .sub-url-box {
+    flex-direction: column;
+    padding: 12px 14px;
+  }
+
+  .sub-url-box input {
+    width: 100%;
+    padding: 8px 4px;
+  }
+
+  .sub-url-box .btn-copy-sub {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .proxy-card .card-body {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .proxy-card .card-actions {
+    justify-content: flex-end;
+  }
+
+  .proxy-results-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

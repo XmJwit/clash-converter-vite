@@ -1,0 +1,11 @@
+services:
+  clash-converter:
+    build: .
+    container_name: clash-converter-vite
+    ports:
+      - "${PORT:-8787}:8787"
+    environment:
+      - PORT=8787
+      # 对称加密密钥：不设置则每次重启生成临时密钥，旧订阅链接会失效
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-please-change-me}
+    restart: unless-stopped
